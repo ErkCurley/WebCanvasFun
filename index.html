@@ -1,0 +1,55 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<canvas id="myCanvas" style="border:1px solid #000000;" height="500px" width="1400px">
+		</canvas>
+		<script>
+			var canvas = document.getElementById("myCanvas");
+			var ctx = canvas.getContext("2d");
+			ctx.fillStyle = "#FF0000";
+
+			var height = canvas.height;
+			var width = canvas.width;
+			var drops = 1000;
+ 			
+			var xpos = [];
+			var ypos = [];
+			
+			for(i=0;i<drops;i++){
+				xpos.push(Math.random()*width);
+				ypos.push(Math.random()*height);
+			}
+
+			function draw(){
+				for(i=0;i<drops;i++){
+					ctx.fillRect(xpos[i],ypos[i],2,6);
+				}
+			}
+
+			function gravity(){
+				for(i=0;i<drops;i++){
+					ypos[i] = ypos[i] + 1;
+				}
+				//console.log(ypos[1]);
+ 			}
+
+			function reset(){
+				for(i=0;i<drops;i++){
+					if(ypos[i] >= height){
+						xpos[i] = Math.random()*width;
+						ypos[i] = (Math.random()*height)-100;
+					}	
+				}
+			}
+
+			function init(){
+				draw();
+				gravity();
+				reset();
+			}
+
+			var myVar = setInterval(init, 20);
+		</script>
+	</body>
+</html>
