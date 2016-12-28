@@ -10,18 +10,24 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<div width="100%" class='.wrap'>
-  			<canvas id="myCanvas" style="border:1px solid #000000;" height="1px" width="1px" margin = "10px 10px 10px 10px">	
+	    <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <canvas id="myCanvas" style="border:1px solid #000000;" height="1px" width="" margin = "10px 10px 10px 10px">
 			</canvas>
-		</div>
+			    </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
 		<script>
 			var canvas = document.getElementById("myCanvas");
 			var windowWidth = $(window).width();
 			var windowHeight = $(window).height();
-			canvas.width = windowWidth - 20;
+			canvas.width = $("#myCanvas").parent().width();
 			canvas.height = windowHeight - 20;
 			var ctx = canvas.getContext("2d");
-			ctx.fillStyle = "#FFFFFF"; 
+			ctx.fillStyle = "#FFFFFF";
 
 			var height = canvas.height;
 			var width = canvas.width;
@@ -71,17 +77,17 @@
 							numberXDone = 0;
 							if(typeof(colors[0]) == "string"){
 								dropColor[i] = colors[0];
-								console.log(colors[0]);
+								//console.log(colors[0]);
 							}else{
-								console.log(colors[0]);
+								//console.log(colors[0]);
 								for(j=0;j<colorsStart.length;j++){
 									colors[j] = colorsStart[j];
-									console.log("I just reset the colors");
+									//console.log("I just reset the colors");
 								}
 								dropColor[j] = colors[0];
 							}
 						}
-					}	
+					}
 				}
 			}
 
