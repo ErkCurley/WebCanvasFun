@@ -12,15 +12,24 @@
 	<body>
 	    <div class="container">
             <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
+                <div class="col-lg-2">
+                	<select id = "Type">
+					  <option value="Waterfall">Waterfall</option>
+					  <option value="Fire">Fire</option>
+					  <option value="Snow">Snow</option>
+					  <option value="Ripples">Ripples</option>
+					</select>
+
+                </div>
+                <div class="col-lg-8">
                     <canvas id="myCanvas" style="border:1px solid #000000;" height="1px" width="" margin = "10px 10px 10px 10px">
-			</canvas>
+					</canvas>
 			    </div>
-                <div class="col-md-1"></div>
+                <div class="col-lg-2"></div>
             </div>
         </div>
 		<script>
+			//Canvas
 			var canvas = document.getElementById("myCanvas");
 			var windowWidth = $(window).width();
 			var windowHeight = $(window).height();
@@ -28,17 +37,24 @@
 			canvas.height = windowHeight - 20;
 			var ctx = canvas.getContext("2d");
 			ctx.fillStyle = "#FFFFFF";
-
+			
+			//Canvas Size
 			var height = canvas.height;
 			var width = canvas.width;
+			
+			//Colors
 			var colorsStart = ["#FF0000","#0099ff","#66ff66","#ff0066","#6600cc","#ff6600","#00ffff","#ffff00","#00ffcc","#9966ff"];
 			var colors = ["#FF0000","#0099ff","#66ff66","#ff0066","#6600cc","#ff6600","#00ffff","#ffff00","#00ffcc","#9966ff"];
+			
+
+			//Paramaters
 			var drops = 1000;
 			var dropColor = [];
 			var xpos = [];
 			var ypos = [];
 			var xdone = [];
 			var numberXDone = 0;
+			var display = "";
 			
 			for(i=0;i<drops;i++){
 				xpos.push(Math.random()*width);
