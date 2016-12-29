@@ -56,11 +56,14 @@
 			var numberXDone = 0;
 			var display = "";
 			
+			//Initialize Drops
 			for(i=0;i<drops;i++){
 				xpos.push(Math.random()*width);
 				ypos.push(Math.random()*height);
 			}
 
+
+			//Draw Drops
 			function draw(){
 				for(i=0;i<drops;i++){
 					if(dropColor[i] !== 'undefined'){
@@ -72,6 +75,7 @@
 				}
 			}
 
+			//Apply transfomation
 			function gravity(){
 				for(i=0;i<drops;i++){
 					ypos[i] = ypos[i] + 1;
@@ -79,6 +83,7 @@
 				//console.log(ypos[1]);
  			}
 
+ 			//Stuff between Frames
 			function reset(){
 				for(i=0;i<drops;i++){
 					if(ypos[i] >= height){
@@ -86,7 +91,13 @@
 						ypos[i] = (Math.random()*height)-100;
 						xdone[i] = 1;
 						numberXDone += 1;
-						if(numberXDone < .75*width){
+						color();
+					}
+				}
+			}
+
+			function color(){
+				if(numberXDone < .75*width){
 							dropColor[i] = colors[0];
 						}else{
 							colors.shift();
@@ -103,8 +114,6 @@
 								dropColor[j] = colors[0];
 							}
 						}
-					}
-				}
 			}
 
 			function init(){
