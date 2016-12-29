@@ -48,13 +48,13 @@
 			
 
 			//Paramaters
-			var drops = 1000;
+			var drops = 100;
 			var dropColor = [];
 			var xpos = [];
 			var ypos = [];
 			var xdone = [];
 			var numberXDone = 0;
-			var display = "";
+			var display = document.getElementById('Type').value;
 			
 			//Initialize Drops
 			for(i=0;i<drops;i++){
@@ -62,68 +62,105 @@
 				ypos.push(Math.random()*height);
 			}
 
-
 			//Draw Drops
 			function draw(){
-				for(i=0;i<drops;i++){
-					if(dropColor[i] !== 'undefined'){
-						ctx.fillStyle = dropColor[i];
-					}else{
-						ctx.fillStyle = "#FFFFFF";
+				if(display == "Waterfall"){
+					for(i=0;i<drops;i++){
+						if(dropColor[i] !== 'undefined'){
+							ctx.fillStyle = dropColor[i];
+						}else{
+							ctx.fillStyle = "#FFFFFF";
+						}
+						ctx.fillRect(xpos[i],ypos[i],2,6);
 					}
-					ctx.fillRect(xpos[i],ypos[i],2,6);
 				}
+				
 			}
 
 			//Apply transfomation
 			function gravity(){
-				for(i=0;i<drops;i++){
-					ypos[i] = ypos[i] + 1;
+				if(display == "Waterfall"){
+					for(i=0;i<drops;i++){
+						ypos[i] = ypos[i] + 1;
+					}	
 				}
 				//console.log(ypos[1]);
  			}
 
  			//Stuff between Frames
 			function reset(){
-				for(i=0;i<drops;i++){
-					if(ypos[i] >= height){
-						xpos[i] = Math.random()*width;
-						ypos[i] = (Math.random()*height)-100;
-						xdone[i] = 1;
-						numberXDone += 1;
-						color();
+				if(display == "Waterfall"){
+					for(i=0;i<drops;i++){
+						if(ypos[i] >= height){
+							xpos[i] = Math.random()*width;
+							ypos[i] = (Math.random()*height)-100;
+							xdone[i] = 1;
+							numberXDone += 1;
+							color();
+						}
+					}	
+				}
+				
+			}
+
+			//Changes color
+			function color(){
+				if(display == "Waterfall"){
+					if(numberXDone < .75*width){
+						dropColor[i] = colors[0];
+					}else{
+						colors.shift();
+						numberXDone = 0;
+						if(typeof(colors[0]) == "string"){
+							dropColor[i] = colors[0];
+							//console.log(colors[0]);
+						}else{
+							//console.log(colors[0]);
+							for(j=0;j<colorsStart.length;j++){
+								colors[j] = colorsStart[j];
+								//console.log("I just reset the colors");
+							}
+							dropColor[j] = colors[0];
+						}
 					}
 				}
+				
 			}
 
-			function color(){
-				if(numberXDone < .75*width){
-							dropColor[i] = colors[0];
-						}else{
-							colors.shift();
-							numberXDone = 0;
-							if(typeof(colors[0]) == "string"){
-								dropColor[i] = colors[0];
-								//console.log(colors[0]);
-							}else{
-								//console.log(colors[0]);
-								for(j=0;j<colorsStart.length;j++){
-									colors[j] = colorsStart[j];
-									//console.log("I just reset the colors");
-								}
-								dropColor[j] = colors[0];
-							}
-						}
+			//Checks for change in game type
+			function checkChange(){
+				display = document.getElementById('Type').value;
 			}
 
+			function clear(){
+				ctx.fillStyle = "#FFFFFF";
+				ctx.fillRect(0,0,width,height);
+			}
+
+			function nothing(){
+				//This does nothing for sleeping
+			}
+
+			//Starts the Process
 			function init(){
+				setTimeout(nothing,10);
 				draw();
 				gravity();
 				reset();
+				checkChange();
+
+				//console.log(display);
 				//console.log(numberXDone);
 			}
 
-			var myVar = setInterval(init, 2);
+			//Clear canvas on change
+			document.getElementById('Type').onchange = function(){
+				setTimeout(clear,2);
+			}
+
+			//Defines the loop speed
+			var myVar = setInterval(init,2);
+
 		</script>
 	</body>
 </html>
