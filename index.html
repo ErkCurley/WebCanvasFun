@@ -12,7 +12,7 @@
 	<body>
                 	<select id = "Type">
 					  <option value="Waterfall">Waterfall</option>
-					  <option value="Fire">Fire</option>
+					  <option value="AntiGravity">Anti-Gravity</option>
 					  <option value="Snow">Snow</option>
 					  <option value="Ripples">Ripples</option>
 					</select>
@@ -79,7 +79,7 @@
 							if(dropColor[i] !== undefined){
 								ctx.fillStyle = dropColor[i];
 							}else{
-								ctx.fillStyle = "#ffff00";
+								ctx.fillStyle = "#ffffff";
 							}
 							ctx.fillRect(xpos[i],ypos[i],2,6);
 						}
@@ -132,7 +132,7 @@
 
 				}
 
-				if(display == "Fire"){
+				if(display == "AntiGravity"){
 					if (calibrated == false) {
 						colorsStart = ["#FF0000","#0099ff","#66ff66","#ff0066","#6600cc","#ff6600","#00ffff","#ffff00","#00ffcc","#9966ff"];
 						colors = ["#FF0000","#0099ff","#66ff66","#ff0066","#6600cc","#ff6600","#00ffff","#ffff00","#00ffcc","#9966ff"];
@@ -157,7 +157,7 @@
 							if(dropColor[i] !== undefined){
 								ctx.fillStyle = dropColor[i];
 							}else{
-								ctx.fillStyle = "#ffff00";
+								ctx.fillStyle = "#ffffff";
 							}
 							ctx.fillRect(xpos[i],ypos[i],2,6);
 						}
